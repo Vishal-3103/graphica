@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Shopping Website</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            color: #cee086;
+            line-height: 1.6;
+            transition: background-color 0.3s ease;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #ff6347;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #cee086;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ff6347;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: #404545;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        header:hover {
+            background-color: #70707a;
+        }
+
+        nav {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li {
+            font-size: 20px;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .banner {
+            background-image: url('https://via.placeholder.com/1200x400');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 5%;
+            text-align: center;
+            color: #fff;
+        }
+
+        .banner h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .banner p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .banner .btn {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            padding: 50px 5%;
+            background-color: #fff;
+            flex-wrap: wrap;
+        }
+
+        .category {
+            text-align: center;
+            flex: 1 1 200px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .category:hover {
+            transform: scale(1.05);
+        }
+
+        .category img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .category img:hover {
+            transform: scale(1.1);
+        }
+
+        .category h2 {
+            margin-top: 15px;
+            font-size: 24px;
+        }
+
+        .subcategories {
+            display: flex;
+            justify-content: center;
+            padding: 30px 5%;
+            background-color: #fff;
+            flex-wrap: wrap;
+        }
+
+        .subcategory {
+            text-align: center;
+            flex: 1 1 150px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .subcategory:hover {
+            transform: scale(1.05);
+        }
+
+        .subcategory h3 {
+            margin-top: 10px;
+            font-size: 20px;
+        }
+
+        .products {
+            background-color: #fff;
+            padding: 50px 5%;
+            display: none;
+        }
+
+        .products h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-card h3 {
+            margin: 15px 0;
+        }
+
+        .product-card p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .product-card .btn {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .product-card .btn:hover {
+            background-color: #ff8567;
+            transform: scale(1.05);
+        }
+
+        .product-description {
+            display: none;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 5%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .footer-section {
+            width: 30%;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ff6347;
+        }
+
+        .welcome-text {
+            color: #ff6347;
+            font-size: 24px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .banner h1 {
+                font-size: 28px;
+            }
+
+            .categories, .products, .subcategories {
+                padding: 20px 5%;
+            }
+
+            .footer-section {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .category, .subcategory {
+                flex: 1 1 100%;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #ff6347;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+        }
+
+        .modal label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .modal input[type="text"],
+        .modal input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .modal input[type="submit"] {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .modal input[type="submit"]:hover {
+            background-color: #ff8567;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="Screenshot_2024-10-13_100033-transformed.png" width="150px" height="70px" alt="Logo">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <a href="#" onclick="document.getElementById('loginModal').style.display='block'">Login</a>
+        </div>
+    </header>
+
+    <div class="banner">
+        <h1>Welcome to CLOUD9</h1>
+        <p>Your one-stop shop for all your fashion needs.</p>
+        <a href="#" class="btn">Shop Now</a>
+    </div>
+
+    <div class="categories">
+        <div class="category" onclick="showSubcategories('men')">
+            <img src="Men._SS300_QL85_FMpng_.png" alt="Men's Fashion">
+            <h2>Men</h2>
+        </div>
+        <div class="category" onclick="showSubcategories('women')">
+            <img src="Women._SS300_QL85_FMpng_.png" alt="Women's Fashion">
+            <h2>Women</h2>
+        </div>
+    </div>
+
+    <div id="subcategorySection" class="subcategories" style="display:none;">
+        <h2 id="subCategoryTitle"></h2>
+    </div>
+
+    <div id="productsSection" class="products">
+        <h2>Products</h2>
+        <div id="productGrid" class="product-grid"></div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping Information</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Login</h2>
+            <form id="loginForm">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <input type="submit" value="Login">
+            </form>
+            <div class="toggle-link">
+                <p>Don't have an account? <a href="#" onclick="toggleForms()">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div id="signupModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="newUsername">Username</label>
+                <input type="text" id="newUsername" name="newUsername" required>
+                <label for="newPassword">Password</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <input type="submit" value="Sign Up">
+            </form>
+            <div class="toggle-link">
+                <p>Already have an account? <a href="#" onclick="toggleForms()">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSubcategories(category) {
+            const subCategoryTitle = document.getElementById('subCategoryTitle');
+            const subcategorySection = document.getElementById('subcategorySection');
+            const productGrid = document.getElementById('productGrid');
+
+            // Clear previous products
+            productGrid.innerHTML = '';
+            document.getElementById('productsSection').style.display = 'none';
+
+            if (category === 'men') {
+                subCategoryTitle.innerText = "Men's Fashion";
+                createSubcategories(['Casual Wear', 'Sports Wear', 'Formals']);
+            } else if (category === 'women') {
+                subCategoryTitle.innerText = "Women's Fashion";
+                createSubcategories(['Casual Wear', 'Sports Wear', 'Formals']);
+            }
+            subcategorySection.style.display = 'block';
+        }
+
+        function createSubcategories(subcategories) {
+            const subcategorySection = document.getElementById('subcategorySection');
+            subcategorySection.innerHTML = ''; // Clear existing subcategories
+
+            subcategories.forEach(subcategory => {
+                const subDiv = document.createElement('div');
+                subDiv.className = 'subcategory';
+                subDiv.onclick = () => openProducts(subcategory);
+                subDiv.innerHTML = `<h3>${subcategory}</h3>`;
+                subcategorySection.appendChild(subDiv);
+            });
+        }
+
+        function openProducts(subcategory) {
+            const productGrid = document.getElementById('productGrid');
+            productGrid.innerHTML = ''; // Clear previous products
+            document.getElementById('productsSection').style.display = 'block';
+
+            // Here, you can add logic to load products based on subcategory
+            // For demonstration, I'll add placeholder products
+            for (let i = 1; i <= 1; i++) {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'product-card';
+                productDiv.innerHTML = `
+                    <img src="Untitled design 1.png" alt="${subcategory} Product ${i}">
+                    <h3>${subcategory} Product ${i}</h3>
+                    <p>$${(i + 10).toFixed(2)}</p>
+                    <button class="btn" onclick="showDescription(this)">Show More</button>
+                    <div class="product-description">This is a detailed description of ${subcategory} Product ${i}. It includes information about features, materials, and more.</div>
+                `;
+                productGrid.appendChild(productDiv);
+            }
+        }
+
+        function showDescription(button) {
+            const description = button.nextElementSibling;
+            if (description.style.display === 'none' || description.style.display === '') {
+                description.style.display = 'block';
+                button.innerText = 'Show Less';
+            } else {
+                description.style.display = 'none';
+                button.innerText = 'Show More';
+            }
+        }
+
+        function toggleForms() {
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            if (loginModal.style.display === 'block') {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'block';
+                document.getElementById('modalTitle').innerText = 'Sign Up';
+            } else {
+                loginModal.style.display = 'block';
+                signupModal.style.display = 'none';
+                document.getElementById('modalTitle').innerText = 'Login';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('signupModal').style.display = 'none';
+        }
+
+        // Modal close functionality
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('loginModal') || event.target === document.getElementById('signupModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
